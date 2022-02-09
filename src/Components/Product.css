@@ -1,0 +1,13 @@
+.total_price,
+.total_stock,
+.grand-total {
+  font-weight: bold;
+}
+
+.grand-total {
+  font-size: 20px;
+}
+
+.last-row {
+  background-color: white;
+}

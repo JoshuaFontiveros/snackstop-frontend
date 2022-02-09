@@ -1,0 +1,26 @@
+/* .navBar {
+  width: 100%;
+} */
+.title {
+  color: white;
+}
+
+h1 {
+  font-weight: bold;
+}
+.nav-list li {
+  list-style: none;
+  color: black;
+}
+
+li strong {
+  display: flex;
+  align-items: center;
+}
+.nav-link:hover {
+  background-color: #00ff00;
+}
+
+strong {
+  margin-left: 10px;
+}

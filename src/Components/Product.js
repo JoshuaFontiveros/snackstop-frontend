@@ -28,13 +28,13 @@ const Product = (props) => {
   const handleShowProductForm = () => setShowProductForm(true);
 
   // useEffect(() => {
-  //   axios.get('http://localhost:8000/products').then(res => {
+  //   axios.get('https://snackstop-backend.herokuapp.com/products').then(res => {
   //     dispatch({ type: 'LOAD_PRODUCTS', payload: res.data });
   //   });
   // }, []);
 
   // useEffect(() => {
-  //   axios.get('http://localhost:8000/categories').then(res => {
+  //   axios.get('https://snackstop-backend.herokuapp.com/categories').then(res => {
   //     dispatch({ type: 'LOAD_CATEGORIES', payload: res.data });
   //     console.log(res.data);
   //   });
@@ -65,10 +65,12 @@ const Product = (props) => {
 
   const onItemDelete = (id) => {
     alert(`Deleted item with ID: ${id}`);
-    axios.delete(`http://localhost:8000/products/${id}`).then((res) => {
-      console.log(res);
-      dispatch({ type: "DELETE_PRODUCT", payload: id });
-    });
+    axios
+      .delete(`https://snackstop-backend.herokuapp.com/products/${id}`)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: "DELETE_PRODUCT", payload: id });
+      });
   };
 
   // useEffect(() => {
@@ -82,16 +84,20 @@ const Product = (props) => {
   // }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/products").then((res) => {
-      dispatch({ type: "LOAD_PRODUCTS", payload: res.data });
-    });
+    axios
+      .get("https://snackstop-backend.herokuapp.com/products")
+      .then((res) => {
+        dispatch({ type: "LOAD_PRODUCTS", payload: res.data });
+      });
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/categories").then((res) => {
-      dispatch({ type: "LOAD_CATEGORIES", payload: res.data });
-      console.log(res.data);
-    });
+    axios
+      .get("https://snackstop-backend.herokuapp.com/categories")
+      .then((res) => {
+        dispatch({ type: "LOAD_CATEGORIES", payload: res.data });
+        console.log(res.data);
+      });
   }, []);
 
   //validation for Form.Control type = 'number'
@@ -160,7 +166,10 @@ const Product = (props) => {
 
     if (toUpdateItem._id) {
       axios
-        .put(`http://localhost:8000/products/${toUpdateItem._id}`, newProduct)
+        .put(
+          `https://snackstop-backend.herokuapp.com/products/${toUpdateItem._id}`,
+          newProduct
+        )
         .then((res) => {
           newProduct._id = res.data._id;
           if (!res.data.error) {
@@ -177,13 +186,15 @@ const Product = (props) => {
       ) {
         alert("Product already exists");
       } else {
-        axios.post("http://localhost:8000/products", newProduct).then((res) => {
-          if (!res.data.error) {
-            dispatch({ type: "ADD_PRODUCT", payload: res.data });
-          } else {
-            alert(res.data.error);
-          }
-        });
+        axios
+          .post("https://snackstop-backend.herokuapp.com/products", newProduct)
+          .then((res) => {
+            if (!res.data.error) {
+              dispatch({ type: "ADD_PRODUCT", payload: res.data });
+            } else {
+              alert(res.data.error);
+            }
+          });
       }
     }
     setToUpdateItem({});

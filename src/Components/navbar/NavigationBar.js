@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Navbar,
   Nav,
@@ -9,8 +9,8 @@ import {
   Modal,
   Button,
   Form,
-} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+} from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUsers,
   faBox,
@@ -18,15 +18,15 @@ import {
   faCartPlus,
   faStore,
   faBoxes,
-} from '@fortawesome/free-solid-svg-icons';
-import Product from '../Product';
-import './Navbar.css';
-import axios from 'axios';
+} from "@fortawesome/free-solid-svg-icons";
+import Product from "../Product";
+import "./Navbar.css";
+import axios from "axios";
 
-const NavigationBar = props => {
+const NavigationBar = (props) => {
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.categories);
-  const products = useSelector(state => state.products);
+  const categories = useSelector((state) => state.categories);
+  const products = useSelector((state) => state.products);
 
   // Get the Date with a format yyyy-mm-dd
 
@@ -41,12 +41,12 @@ const NavigationBar = props => {
   const handleShowProductForm = () => setShowProductForm(true);
 
   // Product Form
-  const [productName, setProductName] = useState('');
+  const [productName, setProductName] = useState("");
   const [productBasePrice, setProductBasePrice] = useState(0);
-  const [productCategory, setProductCategory] = useState('Food');
-  const [productMarkUp, setProductMarkUp] = useState('0');
+  const [productCategory, setProductCategory] = useState("Food");
+  const [productMarkUp, setProductMarkUp] = useState("0");
   const [productQuantity, setProductQuantity] = useState(0);
-  const [productDate, setProductDate] = useState('');
+  const [productDate, setProductDate] = useState("");
 
   //For Pop Up Category Modal
   const [showCategoryForm, setShowCategoryForm] = useState(false);
@@ -74,13 +74,15 @@ const NavigationBar = props => {
   }, [props]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/categories').then(res => {
-      dispatch({ type: 'LOAD_CATEGORIES', payload: res.data });
-    });
+    axios
+      .get("https://snackstop-backend.herokuapp.com/categories")
+      .then((res) => {
+        dispatch({ type: "LOAD_CATEGORIES", payload: res.data });
+      });
   }, []);
 
   // submit Form
-  const submitFormHandler = e => {
+  const submitFormHandler = (e) => {
     e.preventDefault();
     let newProduct = {
       _id: products._id ? products._id : null,
@@ -93,36 +95,41 @@ const NavigationBar = props => {
     };
     if (
       products.findIndex(
-        product => product.name.toLowerCase() === productName.toLowerCase()
+        (product) => product.name.toLowerCase() === productName.toLowerCase()
       ) >= 0
     ) {
-      alert('Product already exists');
+      alert("Product already exists");
     } else {
       if (props._id) {
         axios
-          .put(`http://localhost:8000/products${props._id}`, newProduct)
-          .then(res => {
+          .put(
+            `https://snackstop-backend.herokuapp.com/products${props._id}`,
+            newProduct
+          )
+          .then((res) => {
             console.log(res);
             if (!res.data.error) {
-              dispatch({ type: 'UPDATE_ITEM', payload: newProduct });
+              dispatch({ type: "UPDATE_ITEM", payload: newProduct });
             } else {
               alert(res.data.error);
             }
           });
       } else {
-        axios.post('http://localhost:8000/products', newProduct).then(res => {
-          if (!res.data.error) {
-            dispatch({ type: 'ADD_PRODUCT', payload: res.data });
-          } else {
-            alert(res.data.error);
-          }
-        });
+        axios
+          .post("https://snackstop-backend.herokuapp.com/products", newProduct)
+          .then((res) => {
+            if (!res.data.error) {
+              dispatch({ type: "ADD_PRODUCT", payload: res.data });
+            } else {
+              alert(res.data.error);
+            }
+          });
       }
     }
 
-    setProductName('');
+    setProductName("");
     setProductBasePrice(0);
-    setProductCategory('--Select--');
+    setProductCategory("--Select--");
     setProductMarkUp(0);
     setProductQuantity(0);
   };
@@ -136,10 +143,10 @@ const NavigationBar = props => {
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleCloseUserForm}>
+          <Button variant="secondary" onClick={handleCloseUserForm}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleCloseUserForm}>
+          <Button variant="primary" onClick={handleCloseUserForm}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -152,10 +159,10 @@ const NavigationBar = props => {
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleCloseCategoryForm}>
+          <Button variant="secondary" onClick={handleCloseCategoryForm}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleCloseCategoryForm}>
+          <Button variant="primary" onClick={handleCloseCategoryForm}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -168,10 +175,10 @@ const NavigationBar = props => {
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleCloseStoreForm}>
+          <Button variant="secondary" onClick={handleCloseStoreForm}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleCloseStoreForm}>
+          <Button variant="primary" onClick={handleCloseStoreForm}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -183,36 +190,36 @@ const NavigationBar = props => {
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleCloseSuppliesForm}>
+          <Button variant="secondary" onClick={handleCloseSuppliesForm}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleCloseSuppliesForm}>
+          <Button variant="primary" onClick={handleCloseSuppliesForm}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Navbar bg='primary' variant='dark' className='navBar'>
-        <Container className='d-flex justify-content-center align-items-center'>
-          <Navbar.Brand href='#home'>
+      <Navbar bg="primary" variant="dark" className="navBar">
+        <Container className="d-flex justify-content-center align-items-center">
+          <Navbar.Brand href="#home">
             <h1>Sales And Inventory System</h1>
           </Navbar.Brand>
         </Container>
       </Navbar>
-      <Navbar bg='light' expand='lg'>
-        <Container className='d-flex justify-content-center'>
+      <Navbar bg="light" expand="lg">
+        <Container className="d-flex justify-content-center">
           {/* <Navbar.Brand bg='light'>Welcome back, Cassiah</Navbar.Brand> */}
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='d-flex justify-content-center align-items-center'>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="d-flex justify-content-center align-items-center">
               <strong>
-                <NavDropdown title='Users' id='basic-nav-dropdown'>
+                <NavDropdown title="Users" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={handleShowUserForm}>
                     Add New User
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to='/users'>
+                    <Link to="/users">
                       <FontAwesomeIcon icon={faUsers} />
                       <strong>View Users</strong>
                     </Link>
@@ -220,13 +227,13 @@ const NavigationBar = props => {
                 </NavDropdown>
               </strong>
               <strong>
-                <NavDropdown title='Products' id='basic-nav-dropdown'>
+                <NavDropdown title="Products" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={handleShowProductForm}>
                     Add New Product
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to='/products'>
+                    <Link to="/products">
                       <FontAwesomeIcon icon={faBox} />
                       <strong>View Products</strong>
                     </Link>
@@ -234,13 +241,13 @@ const NavigationBar = props => {
                 </NavDropdown>
               </strong>
               <strong>
-                <NavDropdown title='Category' id='basic-nav-dropdown'>
+                <NavDropdown title="Category" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={handleShowCategoryForm}>
                     Add New Category
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to='/categories'>
+                    <Link to="/categories">
                       <FontAwesomeIcon icon={faCubes} />
                       <strong>View Categories</strong>
                     </Link>
@@ -248,9 +255,9 @@ const NavigationBar = props => {
                 </NavDropdown>
               </strong>
               <strong>
-                <NavDropdown title='Sales' id='basic-nav-dropdown'>
+                <NavDropdown title="Sales" id="basic-nav-dropdown">
                   <NavDropdown.Item>
-                    <Link to='/sales'>
+                    <Link to="/sales">
                       <FontAwesomeIcon icon={faCartPlus} />
                       <strong>View Sales</strong>
                     </Link>
@@ -258,13 +265,13 @@ const NavigationBar = props => {
                 </NavDropdown>
               </strong>
               <strong>
-                <NavDropdown title='Stores' id='basic-nav-dropdown'>
+                <NavDropdown title="Stores" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={handleShowStoreForm}>
                     Add New Store
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to='/stores'>
+                    <Link to="/stores">
                       <FontAwesomeIcon icon={faStore} />
                       <strong>View Stores</strong>
                     </Link>
@@ -272,13 +279,13 @@ const NavigationBar = props => {
                 </NavDropdown>
               </strong>
               <strong>
-                <NavDropdown title='Supplies' id='basic-nav-dropdown'>
+                <NavDropdown title="Supplies" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={handleShowSuppliesForm}>
                     Add New Supply
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <Link to='/supplies'>
+                    <Link to="/supplies">
                       <FontAwesomeIcon icon={faBoxes} />
                       <strong>View Supplies</strong>
                     </Link>

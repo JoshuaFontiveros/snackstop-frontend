@@ -23,13 +23,13 @@ const User = (props) => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    axios.get("https://snackstop-backend.herokuapp.com/users").then((res) => {
+    axios.get("https://snackstop-v2.herokuapp.com/users").then((res) => {
       dispatch({ type: "LOAD_USERS", payload: res.data });
     });
   }, []);
 
   useEffect(() => {
-    axios.get("https://snackstop-backend.herokuapp.com/stores").then((res) => {
+    axios.get("https://snackstop-v2.herokuapp.com/stores").then((res) => {
       dispatch({ type: "LOAD_STORES", payload: res.data });
     });
   }, []);
@@ -37,7 +37,7 @@ const User = (props) => {
   const onUserDelete = (id) => {
     alert(`delete ID: ${id}`);
     axios
-      .delete(`https://snackstop-backend.herokuapp.com/users/${id}`)
+      .delete(`https://snackstop-v2.herokuapp.com/users/${id}`)
       .then((res) => {
         console.log(res);
         dispatch({ type: "DELETE_USER", payload: id });
@@ -67,7 +67,7 @@ const User = (props) => {
       alert("User already exists");
     } else {
       axios
-        .post("https://snackstop-backend.herokuapp.com/users", newUser)
+        .post("https://snackstop-v2.herokuapp.com/users", newUser)
         .then((res) => {
           if (!res.data.error) {
             dispatch({ type: "ADD_USERS", payload: res.data });

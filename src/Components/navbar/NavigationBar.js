@@ -74,11 +74,9 @@ const NavigationBar = (props) => {
   }, [props]);
 
   useEffect(() => {
-    axios
-      .get("https://snackstop-backend.herokuapp.com/categories")
-      .then((res) => {
-        dispatch({ type: "LOAD_CATEGORIES", payload: res.data });
-      });
+    axios.get("https://snackstop-v2.herokuapp.com/categories").then((res) => {
+      dispatch({ type: "LOAD_CATEGORIES", payload: res.data });
+    });
   }, []);
 
   // submit Form
@@ -103,7 +101,7 @@ const NavigationBar = (props) => {
       if (props._id) {
         axios
           .put(
-            `https://snackstop-backend.herokuapp.com/products${props._id}`,
+            `https://snackstop-v2.herokuapp.com/products${props._id}`,
             newProduct
           )
           .then((res) => {
@@ -116,7 +114,7 @@ const NavigationBar = (props) => {
           });
       } else {
         axios
-          .post("https://snackstop-backend.herokuapp.com/products", newProduct)
+          .post("https://snackstop-v2.herokuapp.com/products", newProduct)
           .then((res) => {
             if (!res.data.error) {
               dispatch({ type: "ADD_PRODUCT", payload: res.data });

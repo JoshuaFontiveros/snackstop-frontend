@@ -19,13 +19,13 @@ const Sale = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    axios.get("https://snackstop-backend.herokuapp.com/sales").then((res) => {
+    axios.get("https://snackstop-v2.herokuapp.com/sales").then((res) => {
       dispatch({ type: "LOAD_SALES", payload: res.data });
     });
   }, []);
 
   useEffect(() => {
-    axios.get("https://snackstop-backend.herokuapp.com/stores").then((res) => {
+    axios.get("https://snackstop-v2.herokuapp.com/stores").then((res) => {
       dispatch({ type: "LOAD_STORES", payload: res.data });
     });
   }, []);
@@ -44,7 +44,7 @@ const Sale = () => {
       alert("Product already exists");
     } else {
       axios
-        .post("https://snackstop-backend.herokuapp.com/sales", newSales)
+        .post("https://snackstop-v2.herokuapp.com/sales", newSales)
         .then((res) => {
           if (!res.data.error) {
             dispatch({ type: "ADD_SALES", payload: res.data });

@@ -14,28 +14,24 @@ const Store = () => {
   //storeForm
 
   useEffect(() => {
-    axios.get("https://snackstop-backend.herokuapp.com/stores").then((res) => {
+    axios.get("https://snackstop-v2.herokuapp.com/stores").then((res) => {
       dispatch({ type: "LOAD_STORES", payload: res.data });
       console.log(res.data);
     });
   }, [dispatch]);
 
   useEffect(() => {
-    axios
-      .get("https://snackstop-backend.herokuapp.com/products")
-      .then((res) => {
-        dispatch({ type: "LOAD_PRODUCTS", payload: res.data });
-        console.log(res.data);
-      });
+    axios.get("https://snackstop-v2.herokuapp.com/products").then((res) => {
+      dispatch({ type: "LOAD_PRODUCTS", payload: res.data });
+      console.log(res.data);
+    });
   }, [dispatch]);
 
   useEffect(() => {
-    axios
-      .get("https://snackstop-backend.herokuapp.com/supplies")
-      .then((res) => {
-        dispatch({ type: "LOAD_SUPPLIES", payload: res.data });
-        console.log(res.data);
-      });
+    axios.get("https://snackstop-v2.herokuapp.com/supplies").then((res) => {
+      dispatch({ type: "LOAD_SUPPLIES", payload: res.data });
+      console.log(res.data);
+    });
   }, [dispatch]);
 
   return (

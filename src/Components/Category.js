@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, Container, Form, Table } from "react-bootstrap";
+
 const Category = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);

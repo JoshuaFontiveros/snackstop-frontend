@@ -238,7 +238,7 @@ const NavigationBar = (props) => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </strong>
-              <strong>
+              {/* <strong>
                 <NavDropdown title="Category" id="basic-nav-dropdown">
                   <NavDropdown.Item onClick={handleShowCategoryForm}>
                     Add New Category
@@ -251,7 +251,7 @@ const NavigationBar = (props) => {
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>
-              </strong>
+              </strong> */}
               <strong>
                 <NavDropdown title="Sales" id="basic-nav-dropdown">
                   <NavDropdown.Item>
